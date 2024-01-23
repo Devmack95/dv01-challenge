@@ -1,36 +1,46 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './App.css'
 import { getData } from './request/api'
 import { LoanTable } from './LoanTable';
 
-class App extends Component {
+const App = () => {
+  const [loanData, setLoanData] = React.useState([]);
+  const [homeOwnershipFilter, setHomeOwnershipFilter] = React.useState([]);
+  const [quarterFilter, setQuarterFilter] = React.useState([]);
+  const [termFilter, setTermFilter] = React.useState([]);
+  const [yearFilter, setYearFilter] = React.useState([]);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: []
-    }
-  }
-  
-  async componentDidMount() {
-    try {
-      const data = await getData();
-      this.setState({data})
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  React.useEffect(() => {
+    const fetchLoanData = async () => {
+      try {
+        const result = await getData();
+        setLoanData(result);
+      } catch (error) {
+        console.error(error)
+      }
 
-  render() {
-    const {data} = this.state
-    return (
-      <div className="App">
-        <p>HELLO WORLD</p>
-        <LoanTable data={data} />
-        <p>CHARTS AND GRAPHS</p>
-      </div>
-    )
-  }
+    }
+    fetchLoanData();
+
+    setHomeOwnershipFilter()
+    setQuarterFilter()
+    setTermFilter()
+    setYearFilter()
+  }, []);
+
+  return (
+    <div className='App'>
+      <p>HELLO WORLD</p>
+      <LoanTable
+        data={loanData} 
+        homeOwnershipFilter={homeOwnershipFilter} 
+        quarterFilter={quarterFilter}
+        termFilter={termFilter}
+        yearFilter={yearFilter}
+      />
+      <p>CHARTS AND GRAPHS</p>
+    </div>
+  )
 }
 
 export default App

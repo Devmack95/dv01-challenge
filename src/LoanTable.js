@@ -60,21 +60,29 @@ const LoanTable = ({
       field: 'grade_1',
       headerName: 'Grade 1',
       flex: 1,
+      align: 'center',
+      headerAlign: 'center'
     },
     {
       field: 'grade_2',
       headerName: 'Grade 2',
       flex: 1,
+      align: 'center',
+      headerAlign: 'center'
     },
     {
       field: 'grade_3',
       headerName: 'Grade 3',
       flex: 1,
+      align: 'center',
+      headerAlign: 'center'
     },
     {
       field: 'grade_4',
       headerName: 'Grade 4',
       flex: 1,
+      align: 'center',
+      headerAlign: 'center'
     },
   ];
     
@@ -87,13 +95,20 @@ const LoanTable = ({
   }
 
   return (
-    <div style={{ height: 300, width: '100%' }}>
+    <div style={{ height: 110, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}
-        pagesize={5}
-        rowsPerPageOptions={[5]}
+        disableColumnMenu
+        disableColumnSelector
         disableRowSelectionOnClick
+        hideFooter
+        hideFooterPagination
+        sx={{
+          '.MuiDataGrid-columnHeader, .MuiDataGrid-cell': {
+            borderRight: '1px solid rgba(224, 224, 224, 1)'
+          }
+        }}
       />
     </div>
   );

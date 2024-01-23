@@ -4,6 +4,7 @@ import { getData } from './request/api'
 import { LoanTable } from './LoanTable';
 import { LoanTableNav } from './LoanTableNav';
 import { Box } from '@mui/material';
+import { LoanBarGraph } from './LoanGraph';
 
 const App = () => {
   const [loanData, setLoanData] = React.useState([]);
@@ -33,8 +34,14 @@ const App = () => {
   }, []);
 
   return (
-    <Box className='App' gap={4} display='flex' flexDirection='column'>
+    <Box
+      className='App'
+      gap={4}
+      display='flex'
+      flexDirection='column'
+    >
       <p>HELLO WORLD</p>
+      <p>CHARTS AND GRAPHS</p>
       <LoanTableNav
         setTermFilter={setTermFilter}
         setYearFilter={setYearFilter}
@@ -49,7 +56,10 @@ const App = () => {
         termFilter={termFilter}
         yearFilter={yearFilter}
       />
-      <p>CHARTS AND GRAPHS</p>
+      <LoanBarGraph data={loanData} homeOwnershipFilter={homeOwnershipFilter} 
+        quarterFilter={quarterFilter}
+        termFilter={termFilter}
+        yearFilter={yearFilter}/>
     </Box>
   )
 }

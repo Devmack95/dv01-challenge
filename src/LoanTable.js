@@ -9,7 +9,7 @@ const LoanTable = ({
   quarterFilter, 
   yearFilter
 }) => {
-    
+
   const calculateGradeTotal = (grade, data, filters) => {
     return data
       .filter((item) =>
@@ -21,6 +21,7 @@ const LoanTable = ({
 
   const grades = ['1', '2', '3', '4', '5', '6'];
   
+  // Function to filter data
   const totals = grades.reduce((acc, grade) => {
     acc[`grade_${grade}`] = calculateGradeTotal(grade, data, [
       { key: 'homeOwnership', value: homeOwnershipFilter },

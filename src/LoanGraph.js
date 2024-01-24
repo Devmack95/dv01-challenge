@@ -3,7 +3,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import numeral from 'numeral'
 
 const LoanBarGraph = ({ data, termFilter, homeOwnershipFilter, quarterFilter, yearFilter }) => {
-
+// Function to filter data
   const filterData = () => {
     return data.filter(
       (item) =>
@@ -18,6 +18,7 @@ const LoanBarGraph = ({ data, termFilter, homeOwnershipFilter, quarterFilter, ye
 
   const possibleGrades = ['1', '2', '3', '4', '5', '6'];
 
+// Grouping data by grade and summing up currentBalance
   const groupedData = filteredData.reduce((acc, item) => {
     const grade = item.grade;
     const currentBalance = parseFloat(item.currentBalance);
@@ -33,6 +34,7 @@ const LoanBarGraph = ({ data, termFilter, homeOwnershipFilter, quarterFilter, ye
     return acc;
   }, {});
 
+// Create an array of objects with grade and currentBalance
   const chartData = possibleGrades.map((grade) => ({
     grade,
     currentBalance: groupedData[grade] || 0

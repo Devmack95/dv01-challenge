@@ -44,11 +44,11 @@ const LoanBarGraph = ({ data, termFilter, homeOwnershipFilter, quarterFilter, ye
         width={500}
         height={300}
         data={chartData}
-        margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+        margin={{ top: 20, right: 30, left: 80, bottom: 5 }}
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="grade" />
-        <YAxis />
+        <YAxis tickFormatter={(value) => numeral(value).format('$0,0.00')}/>
         <Tooltip formatter={(value) => numeral(value).format('$0,0.00')}/>
         <Legend />
         <Bar dataKey="currentBalance" fill="#8884d8" />

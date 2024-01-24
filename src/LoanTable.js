@@ -10,66 +10,42 @@ const LoanTable = ({
   yearFilter
 }) => {
     
-    const totals = {
-        grade_1: data
-            .filter((item) => item.grade === '1' 
-            && item.homeOwnership !== homeOwnershipFilter 
-            && item.year !== yearFilter 
-            && item.quarter !== quarterFilter 
-            && item.term !== termFilter)
-            .reduce((sum, item) => sum + parseFloat(item.currentBalance), 0),
-        grade_2: data
-            .filter((item) => item.grade === '2' 
-            && item.homeOwnership !== homeOwnershipFilter 
-            && item.year !== yearFilter 
-            && item.quarter !== quarterFilter 
-            && item.term !== termFilter)
-            .reduce((sum, item) => sum + parseFloat(item.currentBalance), 0),
-        grade_3: data
-            .filter((item) => item.grade === '3' 
-            && item.homeOwnership !== homeOwnershipFilter 
-            && item.year !== yearFilter 
-            && item.quarter !== quarterFilter 
-            && item.term !== termFilter)
-            .reduce((sum, item) => sum + parseFloat(item.currentBalance), 0),
-        grade_4: data
-            .filter((item) => item.grade === '4' 
-            && item.homeOwnership !== homeOwnershipFilter 
-            && item.year !== yearFilter 
-            && item.quarter !== quarterFilter 
-            && item.term !== termFilter)
-        .reduce((sum, item) => sum + parseFloat(item.currentBalance), 0),
-        grade_5: data
-            .filter((item) => item.grade === '5' 
-            && item.homeOwnership !== homeOwnershipFilter 
-            && item.year !== yearFilter 
-            && item.quarter !== quarterFilter 
-            && item.term !== termFilter)
-        .reduce((sum, item) => sum + parseFloat(item.currentBalance), 0),
-        grade_6: data
-            .filter((item) => item.grade === '6' 
-            && item.homeOwnership !== homeOwnershipFilter 
-            && item.year !== yearFilter 
-            && item.quarter !== quarterFilter 
-            && item.term !== termFilter)
-            .reduce((sum, item) => sum + parseFloat(item.currentBalance), 0)
-    };
+  const calculateGradeTotal = (grade, data, filters) => {
+    return data
+      .filter((item) =>
+        item.grade === grade &&
+        !filters.some(filter => item[filter.key] === filter.value)
+      )
+      .reduce((sum, item) => sum + parseFloat(item.currentBalance), 0);
+  };
+
+  const grades = ['1', '2', '3', '4', '5', '6'];
+  
+  const totals = grades.reduce((acc, grade) => {
+    acc[`grade_${grade}`] = calculateGradeTotal(grade, data, [
+      { key: 'homeOwnership', value: homeOwnershipFilter },
+      { key: 'year', value: yearFilter },
+      { key: 'quarter', value: quarterFilter },
+      { key: 'term', value: termFilter },
+    ]);
+    return acc;
+  }, {});
    
-    const formattedTotals = {
-      grade_1: numeral(totals.grade_1).format('$0,0.00'),
-      grade_2: numeral(totals.grade_2).format('$0,0.00'),
-      grade_3: numeral(totals.grade_3).format('$0,0.00'),
-      grade_4: numeral(totals.grade_4).format('$0,0.00'),
-      grade_5: numeral(totals.grade_5).format('$0,0.00'),
-      grade_6: numeral(totals.grade_6).format('$0,0.00'), 
+  const formattedTotals = {
+    grade_1: numeral(totals.grade_1).format('$0,0.00'),
+    grade_2: numeral(totals.grade_2).format('$0,0.00'),
+    grade_3: numeral(totals.grade_3).format('$0,0.00'),
+    grade_4: numeral(totals.grade_4).format('$0,0.00'),
+    grade_5: numeral(totals.grade_5).format('$0,0.00'),
+    grade_6: numeral(totals.grade_6).format('$0,0.00'), 
+  }
+ 
+  const rows = [
+    {
+      id: 'totals',
+      ...formattedTotals
     }
-   
-    const rows = [
-        {
-            id: 'totals',
-            ...formattedTotals
-        }
-    ]
+  ]
 
   const columns = [
     {
@@ -117,11 +93,11 @@ const LoanTable = ({
   ];
     
     if (data.length === 0) {
-        return (
-            <div className='App'>
-                <p>. . . Loading</p>
-          </div>
-      )
+      return (
+        <div className='App'>
+            <p>. . . Loading</p>
+        </div>
+    )
   }
 
   return (

@@ -12,7 +12,7 @@ import {
 const LoanTableNav = ({
     termFilter, 
     setTermFilter, 
-    yearFiler, 
+    yearFilter, 
     setYearFilter, 
     quarterFilter, 
     setQuarterFilter, 
@@ -48,7 +48,7 @@ const LoanTableNav = ({
                 <Select
                     labelId='home-ownership-label'
                     id='home-ownership-select'
-                    value={homeOwnershipFilter === undefined ? '' : homeOwnershipFilter}
+                    value={homeOwnershipFilter}
                     label='Home Ownership'
                     onChange={handleHomeOwnershipChange}
                 >
@@ -62,7 +62,7 @@ const LoanTableNav = ({
                 <Select
                     labelId='quarter-label'
                     id='quarter-select'
-                    value={quarterFilter === undefined ? '' : quarterFilter}
+                    value={quarterFilter}
                     label='Quarter'
                     onChange={handleQuarterChange}
                 >
@@ -77,7 +77,7 @@ const LoanTableNav = ({
                 <Select
                     labelId='term-label'
                     id='term-select'
-                    value={termFilter === undefined ? '' : termFilter}
+                    value={termFilter}
                     label='Term'
                     onChange={handleTermChange}
                 >
@@ -90,7 +90,7 @@ const LoanTableNav = ({
                 <Select
                     labelId='year-label'
                     id='year-select'
-                    value={yearFiler === undefined ? '' : yearFiler}
+                    value={yearFilter}
                     label='Year'
                     onChange={handleYearChange}
                 >

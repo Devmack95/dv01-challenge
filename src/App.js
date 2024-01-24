@@ -28,7 +28,6 @@ const App = () => {
       } catch (error) {
         console.error(error)
       }
-
     }
     fetchLoanData();
   }, []);
@@ -48,6 +47,10 @@ const App = () => {
         setQuarterFilter={setQuarterFilter}
         setHomeOwnershipFilter={setHomeOwnershipFilter}
         resetFilter={resetFilter}
+        homeOwnershipFilter={homeOwnershipFilter} 
+        quarterFilter={quarterFilter}
+        termFilter={termFilter}
+        yearFilter={yearFilter}
       />
       <LoanTable
         data={loanData} 

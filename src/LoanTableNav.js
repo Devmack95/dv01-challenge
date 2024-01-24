@@ -31,14 +31,18 @@ const LoanTableNav = ({
 
     const handleQuarterChange = (e) => {
         setQuarterFilter(e.target.value)
-    }
+    };
 
     const handleYearChange = (e) => {
         setYearFilter(e.target.value)
-    }
+    };
 
     return (
-        <Box display='flex' gap={3} justifyContent='center'>
+        <Box
+            display='flex'
+            gap={3}
+            justifyContent='center'
+            sx={{ '.MuiFormControl-root .MuiInputBase-root, .MuiButton-root': { borderRadius: '30px' } }}>
             <FormControl sx={{ minWidth: '200px'}}>
                 <InputLabel id='home-ownership-label'>Home Ownership</InputLabel>
                 <Select
